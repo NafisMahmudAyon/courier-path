@@ -24,6 +24,7 @@ interface Parcel {
   agent?: any;
   createdAt: string;
   payment: any;
+  parcelDetails: any;
 }
 
 interface User {
@@ -134,10 +135,10 @@ const AdminDashboard = () => {
   const unassignedParcels = parcels.filter(p => p.status === 'pending');
   const availableAgents = agents.filter(a => a.isActive);
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 pt-24 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-        <p className="mt-1 text-sm text-gray-600">
+        <h1 className="text-3xl font-bold text-text">Admin Dashboard</h1>
+        <p className="mt-1 text-sm text-text-muted">
           Comprehensive overview
         </p>
       </div>
@@ -247,8 +248,8 @@ const AdminDashboard = () => {
       {activeTab === 'overview' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
-          <div className="bg-white p-6 shadow rounded-lg">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Monthly Parcel Trend</h3>
+          <Card className=" p-6 shadow rounded-lg">
+            <h3 className="text-lg font-medium text-text mb-4">Monthly Parcel Trend</h3>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={monthlyChartData}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -258,10 +259,10 @@ const AdminDashboard = () => {
                 <Bar dataKey="parcels" fill="#3B82F6" />
               </BarChart>
             </ResponsiveContainer>
-          </div>
+          </Card>
 
-          <div className="bg-white p-6 shadow rounded-lg">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Status Distribution</h3>
+          <Card className=" p-6 shadow rounded-lg">
+            <h3 className="text-lg font-medium text-text mb-4">Status Distribution</h3>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -280,15 +281,15 @@ const AdminDashboard = () => {
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
-          </div>
+          </Card>
         </div>
       )}
       {activeTab === 'parcels' && (
-        <div className="bg-white shadow rounded-lg">
+        <Card className="shadow rounded-lg">
           <div className='flex items-end justify-between w-full px-6 py-4 border-b border-gray-200'>
             <div className="">
-              <h2 className="text-lg font-medium text-gray-900">Unassigned Parcels</h2>
-              <p className="text-sm text-gray-600">Assign delivery agents to pending parcels</p>
+              <h2 className="text-lg font-medium text-text">Unassigned Parcels</h2>
+              <p className="text-sm text-text-muted">Assign delivery agents to pending parcels</p>
             </div>
             <Button size='small' variant='outline' onClick={() => { setShowAll(!showAll) }}>{showAll ? "Hide All" : "Show All"}</Button>
           </div>
@@ -296,8 +297,8 @@ const AdminDashboard = () => {
             {showAll ? <>{parcels.length === 0 ? (
               <div className="px-6 py-12 text-center">
                 <Package className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-sm font-medium text-gray-900">No parcels</h3>
-                <p className="mt-1 text-sm text-gray-500">No parcel has been listed.</p>
+                <h3 className="mt-2 text-sm font-medium text-text">No parcels</h3>
+                <p className="mt-1 text-sm text-text-muted">No parcel has been listed.</p>
               </div>
             ) : (
               parcels.map((parcel) => (
@@ -305,15 +306,15 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-medium text-gray-900">
+                        <h3 className="text-lg font-medium text-text">
                           {parcel.trackingId}
                         </h3>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-text-muted">
                         Customer: {parcel.customer.name} ({parcel.customer.email})
                       </p>
                       <p className="text-sm text-gray-500">
-                        Payment: ${parcel.payment.amount} ({parcel.payment.type})
+                        Payment: ${parcel?.parcelDetails.value} ({parcel.payment.type})
                       </p>
                     </div>
                     <div className="ml-4 flex flex-col gap-2">
@@ -327,7 +328,7 @@ const AdminDashboard = () => {
             )}</> : <>{unassignedParcels.length === 0 ? (
               <div className="px-6 py-12 text-center">
                 <Package className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-sm font-medium text-gray-900">No unassigned parcels</h3>
+                <h3 className="mt-2 text-sm font-medium text-text">No unassigned parcels</h3>
                 <p className="mt-1 text-sm text-gray-500">All parcels have been assigned to agents.</p>
               </div>
             ) : (
@@ -336,15 +337,15 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-medium text-gray-900">
+                        <h3 className="text-lg font-medium text-text">
                           {parcel.trackingId}
                         </h3>
                       </div>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-text-muted">
                         Customer: {parcel.customer.name} ({parcel.customer.email})
                       </p>
                       <p className="text-sm text-gray-500">
-                        Payment: ${parcel.payment.amount} ({parcel.payment.type})
+                        Payment: ${parcel.parcelDetails.value} ({parcel.payment.type})
                       </p>
                     </div>
                     <div className="ml-4 flex flex-col gap-2">
@@ -373,17 +374,17 @@ const AdminDashboard = () => {
               ))
             )}</>}
           </div>
-        </div>
+        </Card>
       )}
       {activeTab === 'agents' && (
-        <div className="bg-white shadow rounded-lg">
+        <Card className=" shadow rounded-lg">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">Delivery Agents</h2>
-            <p className="text-sm text-gray-600">Manage your delivery team</p>
+            <h2 className="text-lg font-medium text-text">Delivery Agents</h2>
+            <p className="text-sm text-text-muted">Manage your delivery team</p>
           </div>
           <div className="overflow-x-auto">
             <Table className="min-w-full divide-y divide-gray-200">
-              <TableHeader className="bg-gray-50">
+              <TableHeader className="bg-bg-light">
                 <TableRow>
                   <TableHeadCell className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Agent
@@ -427,7 +428,7 @@ const AdminDashboard = () => {
               </TableBody>
             </Table>
           </div>
-        </div>
+        </Card>
       )}
     </div>
   )

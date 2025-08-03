@@ -102,7 +102,7 @@ const CustomerDashboard = () => {
 
   if (loading) return <LoadingSpinner />;
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
 
       <div className="flex justify-between items-center mb-8">
         <div>
@@ -184,7 +184,7 @@ const CustomerDashboard = () => {
         </Card>
 
         <Card className=" overflow-hidden shadow rounded-lg">
-          <div className="p-5">
+          <div className="px-5">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <CheckCircle className="h-6 w-6 text-green-400" />
@@ -204,7 +204,7 @@ const CustomerDashboard = () => {
         </Card>
       </div>
 
-      <div className="bg-white shadow rounded-lg mb-6">
+      <div className="bg-bg shadow rounded-lg mb-6">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex">
             {[

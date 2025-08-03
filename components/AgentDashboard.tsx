@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useSocket } from '@/context/SocketContext';
 import LoadingSpinner from './LoadingSpinner';
-import { Card, useToast } from './aspect-ui';
+import { Badge, Card, useToast } from './aspect-ui';
 
 interface Parcel {
   _id: string;
@@ -170,12 +170,12 @@ export default function AgentDashboard() {
     new Date(p.createdAt).toDateString() === new Date().toDateString()).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
 
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Agent Dashboard</h1>
-          <p className="mt-1 text-sm text-gray-600">
+          <h1 className="text-3xl font-bold text-primary">Agent Dashboard</h1>
+          <p className="mt-1 text-sm text-text-muted">
             Welcome back, {user?.name}! Manage your assigned deliveries.
           </p>
         </div>
@@ -190,10 +190,10 @@ export default function AgentDashboard() {
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                  <dt className="text-sm font-medium text-text-muted truncate">
                     Pending Deliveries
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">
+                  <dd className="text-lg font-medium text-text">
                     {pendingParcels.length}
                   </dd>
                 </dl>
@@ -210,10 +210,10 @@ export default function AgentDashboard() {
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                  <dt className="text-sm font-medium text-text-muted truncate">
                     Completed Today
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">
+                  <dd className="text-lg font-medium text-text">
                     {completedToday}
                   </dd>
                 </dl>
@@ -224,16 +224,16 @@ export default function AgentDashboard() {
 
         </div>
 
-      <div className="bg-white shadow rounded-lg">
+      <Card className="shadow rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-medium text-gray-900">Assigned Parcels</h2>
+          <h2 className="text-lg font-medium text-text">Assigned Parcels</h2>
         </div>
         <div className="divide-y divide-gray-200">
           {pendingParcels.length === 0 ? (
             <div className="px-6 py-12 text-center">
               <Package className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No assigned parcels</h3>
-              <p className="mt-1 text-sm text-gray-500">
+              <h3 className="mt-2 text-sm font-medium text-text">No assigned parcels</h3>
+              <p className="mt-1 text-sm text-text-muted">
                 Check back later for new deliveries.
               </p>
             </div>
@@ -243,20 +243,20 @@ export default function AgentDashboard() {
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-lg font-medium text-gray-900">
+                      <h3 className="text-lg font-medium text-text">
                         {parcel.trackingId}
                       </h3>
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(parcel.status)}`}>
+                      <Badge className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(parcel.status)}`}>
                         {formatStatus(parcel.status)}
-                      </span>
+                      </Badge>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="flex items-start space-x-2">
                         <MapPin className="h-4 w-4 text-green-500 mt-0.5" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Pickup</p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm font-medium text-text">Pickup</p>
+                          <p className="text-sm text-text-muted">
                             {parcel.pickupAddress.street}, {parcel.pickupAddress.city}
                           </p>
                           {parcel.pickupAddress.contactPhone && (
@@ -270,8 +270,8 @@ export default function AgentDashboard() {
                       <div className="flex items-start space-x-2">
                         <MapPin className="h-4 w-4 text-red-500 mt-0.5" />
                         <div>
-                          <p className="text-sm font-medium text-gray-900">Delivery</p>
-                          <p className="text-sm text-gray-500">
+                          <p className="text-sm font-medium text-text">Delivery</p>
+                          <p className="text-sm text-text-muted">
                             {parcel.deliveryAddress.street}, {parcel.deliveryAddress.city}
                           </p>
                           {parcel.deliveryAddress.contactPhone && (
@@ -284,10 +284,10 @@ export default function AgentDashboard() {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <div className="flex items-center space-x-4 text-sm text-text-muted">
                         <span>{parcel.parcelDetails.weight}kg</span>
                         <span className="capitalize">{parcel.parcelDetails.type}</span>
-                        <span>${parcel.payment.amount} ({parcel.payment.type})</span>
+                        <span>${parcel.parcelDetails.price} ({parcel.payment.type})</span>
                       </div>
 
                       <div className="flex items-center space-x-2">
@@ -324,7 +324,7 @@ export default function AgentDashboard() {
             ))
           )}
         </div>
-      </div>
+      </Card>
     </div>
   );
 }

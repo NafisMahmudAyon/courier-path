@@ -52,11 +52,11 @@ export default function BookingForm() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-    const tokenData = localStorage.getItem('token');
-    if (tokenData) {
-      setToken(token);
+      const tokenData = localStorage.getItem('token');
+      if (tokenData) {
+        setToken(token);
+      }
     }
-  }
   }, []);
 
 
@@ -259,7 +259,7 @@ export default function BookingForm() {
         return (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+              <h3 className="text-lg font-medium text-text mb-4 flex items-center">
                 <Package className="h-5 w-5 mr-2 text-blue-500" />
                 Parcel Details
               </h3>
@@ -344,7 +344,7 @@ export default function BookingForm() {
               </div>
 
               <div>
-                <h4 className="text-md font-medium text-gray-900 mb-2 mt-4">
+                <h4 className="text-md font-medium text-text mb-2 mt-4">
                   Dimensions (cm) - Optional
                 </h4>
                 <div className="grid grid-cols-3 gap-4">
@@ -391,13 +391,13 @@ export default function BookingForm() {
         return (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+              <h3 className="text-lg font-medium text-text mb-4 flex items-center">
                 <DollarSign className="h-5 w-5 mr-2 text-green-500" />
                 Payment Details
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-text mb-1">
                     Payment Type *
                   </label>
                   <select
@@ -428,81 +428,82 @@ export default function BookingForm() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gradient">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-primary">Book a Parcel</h1>
-        <p className="mt-1 text-sm">
-          Fill in the details to schedule your parcel pickup and delivery
-        </p>
-      </div>
+    <div className="px-4 sm:px-6 lg:px-8 py-8 bg-gradient pt-24">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-primary">Book a Parcel</h1>
+          <p className="mt-1 text-sm">
+            Fill in the details to schedule your parcel pickup and delivery
+          </p>
+        </div>
 
-      <div className="mb-8">
-        <nav aria-label="Progress">
-          <ol className="flex items-center gap-4 ">
-            {[
-              { id: 1, name: 'Addresses', icon: MapPin },
-              { id: 2, name: 'Parcel Details', icon: Box },
-              { id: 3, name: 'Payment', icon: DollarSign }
-            ].map((stepItem, index) => (
-              <React.Fragment key={stepItem.id}>
-                <li key={stepItem.id} className={`${index !== 2 ? '' : ''} relative`}>
-                  <div className="flex flex-1 items-center">
-                    <div className={`flex flex-1 items-center justify-center !w-10 h-10 rounded-full border-2 ${step >= stepItem.id
-                      ? 'bg-primary border-primary text-primary-foreground'
-                      : 'border-border'
-                      }`}>
-                      <stepItem.icon className="w-5 h-5" />
+        <div className="mb-8">
+          <nav aria-label="Progress">
+            <ol className="flex items-center gap-4 ">
+              {[
+                { id: 1, name: 'Addresses', icon: MapPin },
+                { id: 2, name: 'Parcel Details', icon: Box },
+                { id: 3, name: 'Payment', icon: DollarSign }
+              ].map((stepItem, index) => (
+                <React.Fragment key={stepItem.id}>
+                  <li key={stepItem.id} className={`${index !== 2 ? '' : ''} relative`}>
+                    <div className="flex flex-1 items-center">
+                      <div className={`flex flex-1 items-center justify-center !w-10 h-10 rounded-full border-2 ${step >= stepItem.id
+                        ? 'bg-primary border-primary text-primary-foreground'
+                        : 'border-border'
+                        }`}>
+                        <stepItem.icon className="w-5 h-5" />
+                      </div>
+                      <span className={`ml-2 text-sm font-medium whitespace-nowrap ${step >= stepItem.id ? 'text-primary' : ''
+                        }`}>
+                        {stepItem.name}
+                      </span>
                     </div>
-                    <span className={`ml-2 text-sm font-medium whitespace-nowrap ${step >= stepItem.id ? 'text-primary' : ''
-                      }`}>
-                      {stepItem.name}
-                    </span>
-                  </div>
-                </li>
-                {index !== 2 && (
-                  <Divider className={step > stepItem.id ? 'border-t-primary' : 'border-t-border'} />
-                )}
-              </React.Fragment>
-            ))}
-          </ol>
-        </nav>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Card className="p-6 mb-6">
-          {renderStep()}
-        </Card>
-        <div className="flex justify-between">
-          <Button
-            type="button"
-            variant='default'
-            onClick={() => step > 1 && setStep(step - 1)}
-            className={`${step === 1 ? 'invisible' : ''
-              }`}
-          >
-            Previous
-          </Button>
-
-          {step < 3 ? (
+                  </li>
+                  {index !== 2 && (
+                    <Divider className={step > stepItem.id ? 'border-t-primary' : 'border-t-border'} />
+                  )}
+                </React.Fragment>
+              ))}
+            </ol>
+          </nav>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Card className="p-6 mb-6">
+            {renderStep()}
+          </Card>
+          <div className="flex justify-between">
             <Button
               type="button"
               variant='default'
-              onClick={() => setStep(step + 1)}
-              className=""
+              onClick={() => step > 1 && setStep(step - 1)}
+              className={`${step === 1 ? 'invisible' : ''
+                }`}
             >
-              Next
+              Previous
             </Button>
-          ) : (
-            <Button
-              variant='primary'
-              type="submit"
-              disabled={isLoading}
-              className=""
-            >
-              {isLoading ? 'Booking...' : 'Book Parcel'}
-            </Button>
-          )}
-        </div>
-      </form>
+            {step < 3 ? (
+              <Button
+                type="button"
+                variant='default'
+                onClick={() => setStep(step + 1)}
+                className=""
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                variant='primary'
+                type="submit"
+                disabled={isLoading}
+                className=""
+              >
+                {isLoading ? 'Booking...' : 'Book Parcel'}
+              </Button>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { MapPin, Package, Clock, DollarSign, QrCode, Eye } from 'lucide-react';
 import Link from 'next/link';
-import { Badge } from './aspect-ui';
+import { Badge, Card } from './aspect-ui';
 
 interface ParcelCardProps {
   parcel: {
@@ -40,7 +40,7 @@ export default function ParcelCard({ parcel }: ParcelCardProps) {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-6 hover:shadow-md transition-shadow">
+    <Card className=" shadow rounded-lg p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div className="flex items-center space-x-3">
           <div className="flex-shrink-0">
@@ -111,6 +111,6 @@ export default function ParcelCard({ parcel }: ParcelCardProps) {
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
