@@ -3,7 +3,7 @@ import { Spinner } from './aspect-ui'
 
 const LoadingSpinner = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-bg">
       <div className="text-center">
         <div className="animate-spin mx-auto mb-4">
           <Spinner size="large" />
