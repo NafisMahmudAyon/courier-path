@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚚 Courier Path
 
-## Getting Started
+**Courier Path** is a web-based courier and parcel tracking application that allows users to book parcels, track shipments, and manage deliveries. It supports roles for **Admin**, **Agent**, and **Customer** with distinct dashboards and access levels.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔗 Live URL & Repository
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Live App**: [https://courier-path.vercel.app](https://courier-path.vercel.app)
+- **Backend Repository**: [https://github.com/NafisMahmudAyon/courier-path-backend](https://github.com/NafisMahmudAyon/courier-path-backend)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Demo Login Credentials
 
-## Learn More
+| Role   | Email                 | Password |
+|--------|------------------------|----------|
+| Admin  | `admin@admin.admin`    | `@admin` |
+| User   | `user@user.user`       | `123456` |
+| Agent  | `agent@agent.agent`    | `123456` |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 Routes Overview
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Path                   | Description                                              |
+|------------------------|----------------------------------------------------------|
+| `/`                    | Landing page with parcel tracking and user actions       |
+| `/book`                | Book a new parcel (only for logged-in users)             |
+| `/dashboard`           | Role-based dashboard (admin, agent, customer)            |
+| `/login`               | Login page for all users                                 |
+| `/register`            | Register as a user (customer by default)                 |
+| `/register?role=agent` | Register as an agent                                     |
+| `/track`               | Public parcel tracking page                              |
+| `/track/:id`           | Track a specific parcel using parcel ID                  |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧑‍💼 Role-Based Dashboard Details
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Admin Dashboard
+- View all bookings
+- Manage users and agents
+- Assign parcels to agents
+- View system metrics
+
+### Agent Dashboard
+- View assigned parcels
+- Update delivery status
+- Accept/reject assignments
+
+### Customer Dashboard
+- View personal parcel bookings
+- Track delivery progress
+- Book new parcels
+
+---
+
+## 📦 Key Features
+
+- 🔐 Role-based authentication (Admin, Agent, User)
+- 🚀 Parcel booking and tracking system
+- 📬 Agent assignment for parcel delivery
+- 🧭 Real-time tracking (Socket.IO support)
+- 📊 Dashboard analytics and parcel overview
+- 🎨 Clean and responsive UI
+- 🌍 Hosted on Vercel & Render
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js + Tailwind CSS
+- **Backend**: Node.js + Express + Socket.IO
+- **Database**: MongoDB
+- **Deployment**: Vercel (Frontend), Render (Backend)
+
+---
+
+## 📎 Environment Variables (Backend)
+
+Create a `.env` file in your backend with the following:
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+CORS_ORIGIN=https://courier-path.vercel.app
