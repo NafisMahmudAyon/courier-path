@@ -113,7 +113,7 @@ export default function AgentDashboard() {
 
       if (response.ok) {
         toast({
-          message: `Status updated successfully'}`,
+          message: `Status updated successfully`,
           type: 'success',
           duration: 3000
         })
